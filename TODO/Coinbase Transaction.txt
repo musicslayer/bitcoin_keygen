@@ -1,0 +1,42 @@
+block 277316
+hex 043B44
+
+time 1388185914
+hex 52BE093A
+
+Pay to address: bc1q7c5yhtc3leegkyywfrscp5ws33tdv3wxnwmsd7
+
+	
+	
+Block header:
+	20000000 - block version*
+	0000000000000002a7bbd25a417c0374cc55261021e8a9ca74442b01284f0569  - previous block hash* (reversed)
+	c91c008c26e50763e9f548bb8b2fc323735f73577effbc55502c51eb4cc7cf2e  - merkle root (reversed)****
+	52be093a - timestamp
+	1903a30c - target bits*
+	00000000 - nonce**
+	
+	
+Coinbase transaction
+	02000000 - transaction version (just use 1 or 2???)
+	01 - input count
+	0000000000000000000000000000000000000000000000000000000000000000 - prev tx
+	ffffffff - prev out n
+	04 - length of coinbase script
+	03443b04 - coinbase script   =   03  and  block hex  (reversed)
+	ffffffff - sequence
+	01 - output count
+	40BE402500000000 - 625000000, satoshi count, or 6.25 BTC   (reversed)
+	17 - script length
+	a914f6284baf11fe728b108e48e180d1d08c56d645c687 - script***
+	00000000 - locktime
+	
+	
+	
+* Take these from "bitcoin-cli getblocktemplate" output (target bits is taken from "bits" field)
+** Miners can pick any number to find the right hash.
+***Script = a914             f6284baf11fe728b108e48e180d1d08c56d645c6       87
+			OP_HASH160       Address Hash                                   OP_EQUAL
+
+**** Merkle rooot is calculated from transactions.
+Since the only transaction is the coinbase transaction, this will remain constant.
