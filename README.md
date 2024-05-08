@@ -16,14 +16,15 @@ Randomly generate Bitcoin private keys and compute their addresses. Private keys
    * Inside the script, replace the value for "dbPath" with the same value you used above.
    * Note that the probability of actually finding such a private key is extremely low!
   
-   If a result is found, you will see a hexadecimal private key in the console and the log file.
+   If a result is found, you will see a hexadecimal private key, along with any funded bitcoin addresses associated with that key, in the console and the log file.
 
    Example Output:
    ```
-   55c8c38eb853501d2c73359a60e9081eaf5acb25bbd9da3c974f3ae6ce149520
+   Private Key: 55c8c38eb853501d2c73359a60e9081eaf5acb25bbd9da3c974f3ae6ce149520
+       P2PKH(u): 1KTQ8PAgCDhxcyBXD8jfxQDTUaAFSruHf5
    ```
 
-4) If step 3 finds a private key, then run "app_display.js" to see all the different public keys that can be derived from that private key.
+4) (Optional) If step 3 finds a private key, then run "app_display.js" to see all the different public keys that can be derived from that private key.
    * Inside the script, replace the value for "privateKeyHex" with the key from step 3.
 
    Example Output:

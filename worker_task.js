@@ -18,18 +18,23 @@ async function foo() {
         const addressArray = bitcoin_util.getAddressArray(privateKeyArray, batchSize);
 
         let values = await rocksdb.getMany(addressArray);
-        //if(values.some(element => element)) {
-        if(true) {
+        if(values.some(element => element)) {
             // In the rare event we find something, spend the time testing each private key individually.
             for(let j = 0; j < batchSize; j++) {
                 const offset = 32 * j;
                 const privateKey = privateKeyArray.slice(offset, offset + 32);
                 const addressArray2 = bitcoin_util.getAddressArray(privateKey, 1);
+                const types = bitcoin_util.getTypeArray();
                 let values2 = await rocksdb.getMany(addressArray2);
-                //if(values2.some(element => element)) {
-                if(true) {
+                if(values2.some(element => element)) {
+                    // Write the private key along with any public keys that are in the database.
                     const privateKeyHex = Buffer.from(privateKey).toString("hex");
-                    const infoString = privateKeyHex;
+                    let infoString = "Private Key: " + privateKeyHex;
+                    for(let k = 0; k < addressArray2.length; k++) {
+                        if(values2[k]) {
+                            infoString += "\n    " + types[k] + ": " + addressArray2[k];
+                        }
+                    }
                     console.log(infoString);
                     log_util.log(infoString);
                 }

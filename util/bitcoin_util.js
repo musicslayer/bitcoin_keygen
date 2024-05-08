@@ -35,25 +35,25 @@ function getAddressArray(privateKeyArray, batchSize) {
         const hashC = _ripemd160(_sha256(publicKeyC));
         const hashU = _ripemd160(_sha256(publicKeyU));
 
-        // Bech32c
+        // Bech32(c)
         const words = toWordsBech32(hashC);
         words.unshift(0x00);
         const addressBech32c = encodeBech32(words);
         addressArray.push(addressBech32c);
 
-        // P2PKHc
+        // P2PKH(c)
         const payloadC = Buffer.concat([BUFFER_0, hashC])
         const checksumC = _sha256(_sha256(payloadC));
         const addressP2PKHc = encodeBase58(Buffer.concat([payloadC, checksumC], payloadC.length + 4));
         addressArray.push(addressP2PKHc);
 
-        // P2PKHu
+        // P2PKH(u)
         const payloadU = Buffer.concat([BUFFER_0, hashU])
         const checksumU = _sha256(_sha256(payloadU));
         const addressP2PKHu = encodeBase58(Buffer.concat([payloadU, checksumU], payloadU.length + 4));
         addressArray.push(addressP2PKHu);
 
-        // P2SHc
+        // P2SH(c)
         const output = Buffer.concat([BUFFER_0, Buffer.from([hashC.length]), hashC]);
         const output_hash = _ripemd160(_sha256(output));
         const output_payload = Buffer.concat([BUFFER_5, output_hash])
@@ -63,6 +63,11 @@ function getAddressArray(privateKeyArray, batchSize) {
     }
 
     return addressArray;
+}
+
+function getTypeArray() {
+    // Returns the type of addresses returned by "getAddressArray"
+    return ["Bech32(c)", "P2PKH(c)", "P2PKH(u)", "P2SH(c)"];
 }
 
 function _ripemd160(buffer) {
@@ -184,3 +189,4 @@ function polymodStep(pre) {
 module.exports.init = init;
 module.exports.finish = finish;
 module.exports.getAddressArray = getAddressArray;
+module.exports.getTypeArray = getTypeArray;
