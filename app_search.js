@@ -12,7 +12,7 @@ const TIMER_INTERVAL = 1000;
 const WORKER_FILE = "./worker_task.js";
 
 // Replace with the path to the folder where you have created the database
-let dbPath = "C:\\GITHUB\\crypto\\DB";
+let dbPath = "C:\\MyFolder\\DB";
 
 let keysProcessed = 0;
 
