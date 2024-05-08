@@ -23,8 +23,8 @@ Randomly generate Bitcoin private keys and compute their addresses. Private keys
    55c8c38eb853501d2c73359a60e9081eaf5acb25bbd9da3c974f3ae6ce149520
    ```
 
-5) If step 3 finds a private key, then run "app_display.js" to see all the different public keys that can be derived from that private key.
-   * Inside the script, replace the value for "privateKey" with the key from step 3.
+4) If step 3 finds a private key, then run "app_display.js" to see all the different public keys that can be derived from that private key.
+   * Inside the script, replace the value for "privateKeyHex" with the key from step 3.
 
    Example Output:
    ```
