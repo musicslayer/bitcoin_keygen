@@ -51,20 +51,3 @@ function createPrivateKey(batchSize) {
     // Create random array of 32 * batchSize numbers 0-255.
     return Uint8Array.from(Array.from({length: 32 * batchSize}, () => Math.floor(Math.random() * 256)));
 }
-
-// Use for puzzles
-/*
-function createPrivateKey(batchSize) {
-    const NUM_N = 9;
-    const NUM_Z = 32 - NUM_N;
-
-    let arr = [];
-
-    for(let i = 0; i < batchSize; i++) {
-        arr.push(Array(NUM_Z).fill(0));
-        arr.push(Array.from({length: NUM_N}, () => Math.floor(Math.random() * 256)));
-    }
-
-    return Uint8Array.from(arr.flat());
-}
-*/
