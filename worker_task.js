@@ -5,13 +5,10 @@ const RocksDB = require("./RocksDB.js");
 const bitcoin_util = require("./util/bitcoin_util.js");
 const log_util = require("./util/log_util.js");
 
-const DATABASE_PATH = "DB";
-//const DATABASE_PATH = "E:\\DB";
-
 foo();
 
 async function foo() {
-    const rocksdb = new RocksDB(DATABASE_PATH);
+    const rocksdb = new RocksDB(workerData.dbPath);
     await rocksdb.open({readOnly: true, maxOpenFiles: 2000});
 
     const batchSize = workerData.batchSize;
@@ -21,14 +18,16 @@ async function foo() {
         const addressArray = bitcoin_util.getAddressArray(privateKeyArray, batchSize);
 
         let values = await rocksdb.getMany(addressArray);
-        if(values.some(element => element)) {
+        //if(values.some(element => element)) {
+        if(true) {
             // In the rare event we find something, spend the time testing each private key individually.
             for(let j = 0; j < batchSize; j++) {
                 const offset = 32 * j;
                 const privateKey = privateKeyArray.slice(offset, offset + 32);
                 const addressArray2 = bitcoin_util.getAddressArray(privateKey, 1);
                 let values2 = await rocksdb.getMany(addressArray2);
-                if(values2.some(element => element)) {
+                //if(values2.some(element => element)) {
+                if(true) {
                     const privateKeyHex = Buffer.from(privateKey).toString("hex");
                     const infoString = privateKeyHex;
                     console.log(infoString);

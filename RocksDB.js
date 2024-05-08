@@ -5,14 +5,14 @@ const rocksdb = require("rocksdb");
 class RocksDB {
     db;
 
-    static async createFromFile(dbpath, filepath) {
+    static async createFromFile(dbPath, addressPath) {
         return new Promise(async (resolve, reject) => {
             try {
-                let rocksdb = new RocksDB(dbpath);
+                let rocksdb = new RocksDB(dbPath);
                 await rocksdb.open();
 
                 const rl = readline.createInterface({
-                    input: fs.createReadStream(filepath, {encoding: "utf8"}),
+                    input: fs.createReadStream(addressPath, {encoding: "utf8"}),
                     crlfDelay: Infinity
                 });
     

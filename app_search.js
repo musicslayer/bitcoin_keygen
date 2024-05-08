@@ -3,13 +3,16 @@ const { Worker } = require("worker_threads");
 const bitcoin_util = require("./util/bitcoin_util.js");
 const log_util = require("./util/log_util.js");
 
-const NUM_BATCHES_PER_WORKER = 1;
+const NUM_BATCHES_PER_WORKER = 10000;
 const BATCH_SIZE = 32;
 const NUM_WORKERS = 4;
 const NUM_BITS = 4;
 const TIMER_INTERVAL = 1000;
 
 const WORKER_FILE = "./worker_task.js";
+
+// Replace with the path to the folder where you have created the database
+let dbPath = "C:\\GITHUB\\crypto\\DB";
 
 let keysProcessed = 0;
 
@@ -57,6 +60,7 @@ async function workerFunc() {
     return new Promise(async (resolve, reject) => {
         const worker = new Worker(WORKER_FILE, {
             workerData: {
+                dbPath: dbPath,
                 numBatches: NUM_BATCHES_PER_WORKER,
                 batchSize: BATCH_SIZE
             }
