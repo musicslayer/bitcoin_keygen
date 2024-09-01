@@ -1,4 +1,4 @@
-# crypto
+# Bitcoin Key Generator
  
 Randomly generate Bitcoin private keys and compute their addresses. Private keys associated with funded bitcoin addresses will be printed to the console and written to a log file.
 
